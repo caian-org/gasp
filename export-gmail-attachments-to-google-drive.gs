@@ -28,8 +28,7 @@
  * @param {string} name: The label name.
  * @return {object}: The Gmail Label object.
  */
-function getGmailLabelByName(name)
-{ 
+function getGmailLabelByName(name) {
 	 return GmailApp.getUserLabelByName(name);
 }
 
@@ -37,10 +36,8 @@ function getGmailLabelByName(name)
  * Export Gmail attachments under a specific criteria to Google Drive.
  * @return {bool}: A boolean value accordingly to the function execution.
  */
-function export()
-{
-	try
-	{
+function export() {
+	try {
 		var driveFolderId = 'abcdefghijklmnopqrstuvwxyz12',
 		    driveFolderObj = DriveApp.getFolderById(driveFolderId);
 				      
@@ -48,25 +45,20 @@ function export()
 			gmailThreads = GmailApp.search(gmailQuery),
 			gmailLabel = getGmailLabelByName('tagName');
 				      
-		for (threadIndex = 0; threadIndex < gmailThreads.length; threadIndex++)
-		{
+		for (threadIndex = 0; threadIndex < gmailThreads.length; threadIndex++) {
 			var gmailThreadMessages = gmailThreads[threadIndex].getMessages();
 							        
-			for (messageIndex = 0; messageIndex < gmailThreadMessages.length; messageIndex++)
-			{
+			for (messageIndex = 0; messageIndex < gmailThreadMessages.length; messageIndex++) {
 				var gmailMessage = gmailThreadMessages[messageIndex],
 					gmailMessageAttachments = gmailMessage.getAttachments();
 											        
-					for (attachmentIndex = 0; attachmentIndex < gmailMessageAttachments.length; attachmentIndex++)
-					{
+					for (attachmentIndex = 0; attachmentIndex < gmailMessageAttachments.length; attachmentIndex++) {
 						var gmailAttachment = gmailMessageAttachments[attachmentIndex];
 															          
-						try
-						{
+						try {
 							driveFolderObj.createFile(gmailAttachment);
 						}
-						catch (error)
-						{
+						catch (error) {
 							Logger.log(JSON.stringify(error));
 						}
 					}
@@ -82,8 +74,7 @@ function export()
 
 		return true;
 	}
-	catch (e)
-	{
+	catch (e) {
 		Logger.log(JSON.stringify(e));
 		return false;
 	}
@@ -93,10 +84,8 @@ function export()
  * The main function of the program. Triggers the export() function.
  * There's not much implementation here. I just decided to keep it separately.
  */
-function main()
-{
-	if (!export()
-	{
+function main() {
+	if (!export() {
 		Logger.log("Something went wrong!");
 	}
 }
