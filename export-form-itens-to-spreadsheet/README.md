@@ -1,5 +1,6 @@
 
-`Google made it very easy to create quizzes with Google Forms.
+```
+Google made it very easy to create quizzes with Google Forms.
 It is even more easy to insert questions: you just have to
 copy and paste the content from a text editor or such to the
 browser, where the form is open and its done. Google automagically
@@ -13,5 +14,6 @@ and their options to plain text.
 
 Now calculate the manual work...
 
-This script was created with that in mind.`
+This script was created with that in mind.
+```
 
