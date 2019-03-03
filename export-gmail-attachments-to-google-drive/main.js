@@ -1,7 +1,7 @@
 /**
  * @script export-gmail-attachments-to-google-drive
  * @author Caian R. Ertl <caianrais@protonmail.com>
- * @revision Jan. 17, 2017.
+ * @revision Mar 3, 2019.
  */
 
 
@@ -10,33 +10,35 @@
  * @param {string} name: The label name.
  * @return {object}: The Gmail Label object.
  */
-function getGmailLabelByName(name) {
-	 return GmailApp.getUserLabelByName(name);
+function getGmailLabelByName(name)
+{
+    return GmailApp.getUserLabelByName(name);
 }
 
 /**
  * Export Gmail attachments under a specific criteria to Google Drive.
  * @return {bool}: A boolean value accordingly to the function execution.
  */
-function export() {
-	try {
-		var driveFolderId = 'abcdefghijklmnopqrstuvwxyz12',
+function export()
+{
+    try {
+        var driveFolderId = 'abcdefghijklmnopqrstuvwxyz12',
 		    driveFolderObj = DriveApp.getFolderById(driveFolderId);
-				      
+
 		var gmailQuery = 'from:email@domain.com label:tagName',
 			gmailThreads = GmailApp.search(gmailQuery),
 			gmailLabel = getGmailLabelByName('tagName');
-				      
-		for (threadIndex = 0; threadIndex < gmailThreads.length; threadIndex++) {
+
+        for (threadIndex = 0; threadIndex < gmailThreads.length; threadIndex++) {
 			var gmailThreadMessages = gmailThreads[threadIndex].getMessages();
-							        
+
 			for (messageIndex = 0; messageIndex < gmailThreadMessages.length; messageIndex++) {
 				var gmailMessage = gmailThreadMessages[messageIndex],
 					gmailMessageAttachments = gmailMessage.getAttachments();
-											        
+
 					for (attachmentIndex = 0; attachmentIndex < gmailMessageAttachments.length; attachmentIndex++) {
 						var gmailAttachment = gmailMessageAttachments[attachmentIndex];
-															          
+
 						try {
 							driveFolderObj.createFile(gmailAttachment);
 						}
@@ -49,7 +51,7 @@ function export() {
 				// This sleep function prevents the script to fail.
 				Utilities.sleep(750);
 			}
-							        
+
 			gmailThreads[threadIndex].removeLabel(gmailLabel);
 			Utilities.sleep(750);
 		}
@@ -66,8 +68,9 @@ function export() {
  * The main function of the program. Triggers the export() function.
  * There's not much implementation here. I just decided to keep it separately.
  */
-function main() {
-	if (!export() {
+function main()
+{
+	if (!export()) {
 		Logger.log("Something went wrong!");
 	}
 }
