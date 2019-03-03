@@ -1,6 +1,6 @@
 # gasp
 
-[![pd](https://forthebadge.com/images/badges/cc-0.svg)][http://creativecommons.org/publicdomain/zero/1.0]
+[![pd](https://forthebadge.com/images/badges/cc-0.svg)](http://creativecommons.org/publicdomain/zero/1.0)
 
 **G**oogle **A**pps **S**cript **P**layground.
 
